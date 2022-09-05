@@ -32,15 +32,13 @@ public class Connection {
 	}
 
 	public List<PlayerData> readData() {
-		System.out.println("-----------------------------------Read--------------------------------");
 		iterDoc = collection.find();
 		it = iterDoc.iterator();
 		myList = getListFromIterator(it);
-		System.out.println("Data is\n " + myList.size());
 		return myList;
 	}
 
-	//here we want login player data index and player have a list and not
+	// here we want login player data index and player have a list and not
 	public int getid(PlayerData playerData) {
 		int i = 0;
 		this.playerData = playerData;
@@ -49,8 +47,8 @@ public class Connection {
 			Gson gson = new Gson();
 			String jsonCartList = gson.toJson(it.next());
 			JSONObject jobj = new JSONObject(jsonCartList);
-			System.out.println("Player Nmae " + jobj.getString("player_name"));
-			//check login user data and mongodb data if here player exist so Login success fully and return user data index   
+			// check login user data and mongodb data if here player exist so Login success
+			// fully and return user data index
 			if ((jobj.getString("player_name").equals(playerData.getPlayer_name()))
 					&& (jobj.getString("Email").equals(playerData.getEmail()))) {
 				break;
@@ -58,10 +56,10 @@ public class Connection {
 				i++;
 			}
 		}
-		System.out.println("I value is "+i);
 		return i;
 	}
-	//Iterator data convert into list 
+
+	// Iterator data convert into list
 	private List<PlayerData> getListFromIterator(Iterator it) {
 		// Convert iterator to iterable
 		Iterable<PlayerData> iterable = () -> it;
